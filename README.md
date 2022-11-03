@@ -12,9 +12,13 @@ quay.io/coreos/butane:release \
 --pretty --strict < fcos.bu > fcos.ign
 ```
 
+Create cluster from `clusterconfig.yml`
+```
+kubeadm init ––config clusterconfig.yml
+```
 
 
-Gonfigure kubectl on the control plane
+Configure kubectl on the control plane
 ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
