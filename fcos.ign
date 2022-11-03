@@ -28,7 +28,7 @@
         "path": "/etc/yum.repos.d/kubernetes.repo",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/4yNUQrDIBiD3z1FL6BSGN0YeIIdYYxibfgLav3RCvP2ozC6PfYpJORLnr5OyCs2lJdYbYR5HIGYbEHNwSzbxuWuNVvnLaEoF1KdFaVEAcqlqFuNOoNT0b89iXCV79swDheB1U4Bs+kFMbkFzpte7MD454nJo518m5PbVXo0RUyi685zmaP8tg7+EwAA//+EhlgnCQEAAA=="
+          "source": "data:;base64,H4sIAAAAAAAC/4yNQarDMAxE97pLbAKf/FLwCXqEUoKjDArYiUQcQ337kk3bZVfDDMx791Qn7BsOlAdtcUW4vQeaYkHdc1iOw8rVe4ucoqA4zlpnJ6qS4VhX3+rqd5gW/+F1yP/d8zKMwx9hi1PGHHoSE17AKfR0HsavLiYJ7UfbrHxml9CcmNArAAD//8xPaYvJAAAA"
         },
         "mode": 420
       },
