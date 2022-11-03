@@ -1,0 +1,55 @@
+{
+  "ignition": {
+    "version": "3.3.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9UPJZAwZVt+OrgtTeuAK100qRnXJ1HwEsfX/imU3hF fthufuss@t470.brq"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "overwrite": true,
+        "path": "/etc/dnf/modules.d/cri-o.module",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5Bcri-o%5D%0Aname%3Dcri-o%0Astream%3D1.17%0Aprofiles%3D%0Astate%3Denabled%0A"
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/yum.repos.d/kubernetes.repo",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/4yNUcrCMBCE3/cuTf4fpIqQE3gEkZJuhy0k7S5NA+b20hf10adhBub77qmO2FbsKA9a44Jwew80xoK65TDvu5Wr9xY5RUFxnLVOTlQlw7EuvtXFbzAt/sPrkM/d89IP/YmwxjFjCv8kJjyDU/ij4zB8dTFJaD/aJuUju4TmxIReAQAA//9BUiOQyQAAAA=="
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/modules-load.d/br_netfilter.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,br_netfilter"
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/sysctl.d/kubernetes.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,net.bridge.bridge-nf-call-iptables%3D1%0Anet.ipv4.ip_forward%3D1%0A"
+        },
+        "mode": 420
+      }
+    ]
+  }
+}
