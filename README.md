@@ -12,6 +12,14 @@ quay.io/coreos/butane:release \
 --pretty --strict < fcos.bu > fcos.ign
 ```
 
+Install packages
+```
+$ sudo rpm-ostree install kubelet kubeadm kubectl cri-o     # control plane
+$ sudo rpm-ostree install kubelet kubeadm cri-o             # compute
+
+```
+
+
 Create cluster from `clusterconfig.yml`
 ```
 kubeadm init ––config clusterconfig.yml
