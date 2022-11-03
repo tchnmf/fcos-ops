@@ -1,4 +1,4 @@
-IGN_CONFIG=/opt/fcos-ops/fcos.ign
+IGN_CONFIG=/opt/fcos-ops/fcos-nogpg.ign
 IMAGE=/opt/fcos/images/fedora-coreos-36.20221014.3.1-qemu.x86_64.qcow2
 VM_NAME=node$1
 VCPUS=2
