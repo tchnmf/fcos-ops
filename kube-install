@@ -1,0 +1,13 @@
+#!/bin/bash
+kube_packages=$(rpm -qa|grep kube)
+
+
+if test -z "$kube_packages"
+then
+	echo "\$kube_packages is empty"
+	rpm-ostree install kubelet kubeadm kubectl cri-o | tee -a /var/log/kube-install.log
+	sleep 1
+	reboot
+else
+      echo "\$kube_packages is NOT empty"
+fi
