@@ -5,7 +5,9 @@ kube_packages=$(rpm -qa|grep kube)
 if test -z "$kube_packages"
 then
 	echo "\$kube_packages is empty"
+	wall "This system is about to be rebooted, kube packages are being installed"
 	rpm-ostree install kubelet kubeadm kubectl cri-o | tee -a /var/log/kube-install.log
+	wall "Packages installed, rebooting..."
 	sleep 1
 	reboot
 else
