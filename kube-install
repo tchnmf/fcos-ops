@@ -1,15 +1,44 @@
 #!/bin/bash
+
+
 kube_packages=$(rpm -qa|grep kube)
+log_file='/var/log/kube-install.log'
+
+function import_gpg_keys(){
+	echo $(sudo -u core gpg --import /var/home/core/.gpg.key) | tee -a  /var/log/kube-install.log
+}
+
+function install_packages(){
+	for x in 4 3 2 1; do
+		wall "This system is about to install packages and reboot"
+		sleep 1;
+	done
+	rpm-ostree install kubelet kubeadm kubectl cri-o | tee -a /var/log/kube-install.log
+	wall "Packages installed, rebooting..."
+}
+
+function inform_and_reboot(){
+	for x in 4 3 2 1; do
+		wall "System rebooting in $x"
+		sleep 1;
+		reboot
+	done
+}
+
+
 
 
 if test -z "$kube_packages"
 then
 	# echo "\$kube_packages is empty"
-	wall "This system is about to be rebooted, kube packages are being installed"
-	rpm-ostree install kubelet kubeadm kubectl cri-o | tee -a /var/log/kube-install.log
-	wall "Packages installed, rebooting..."
-	sleep 1
-	reboot
+	touch $log_file
+	chown root:core $log_file
+	import_gpg_keys | tee -a $log_file
+	install_packages | tee -a $log_file
+	inform_and_reboot | tee -a $log_file
 else
-      # echo "\$kube_packages is NOT empty"
+	import_gpg_keys
+#       # echo "\$kube_packages is NOT empty"
 fi
+
+

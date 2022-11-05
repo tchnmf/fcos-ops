@@ -1,0 +1,26 @@
+# ansible-playbook -i <hostname>, generate-ign.yml
+
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - template:
+        src: fcos-no-gpg-kube-install-bu.j2
+        dest: "{{ inventory_hostname }}.bu"
+      diff: true
+
+    - shell: |
+        podman run --interactive --rm quay.io/coreos/butane:release --pretty --strict < {{ inventory_hostname }}.bu > {{ inventory_hostname }}.ign
+      changed_when: no
+
+    - copy:
+        dest: "{{ inventory_hostname }}.env"
+        content: |
+          IGN_CONFIG=/opt/fcos-ops/bu-templates/{{ inventory_hostname }}.ign
+          IMAGE==/opt/fcos/images/fedora-coreos-36.20221014.3.1-qemu.x86_64.qcow2
+          VM_NAME={{ inventory_hostname }}
+          VCPUS=2
+          RAM_MB=4096
+          DISK_GB=10
+          STREAM=stable

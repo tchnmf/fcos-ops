@@ -1,0 +1,12 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - template:
+        src: fcos-no-gpg-kube-install-bu.j2
+        dest: "{{ inventory_hostname }}.bu"
+      diff: true
+
+    - shell: |
+        podman run --interactive --rm quay.io/coreos/butane:release --pretty --strict < {{ inventory_hostname }}.bu > {{ inventory_hostname }}.ign
