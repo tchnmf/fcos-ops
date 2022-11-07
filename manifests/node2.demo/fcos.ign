@@ -56,7 +56,7 @@
         "path": "/etc/hostname",
         "contents": {
           "compression": "",
-          "source": "data:,node1.demo%0A"
+          "source": "data:,node2.demo%0A"
         },
         "mode": 420
       },

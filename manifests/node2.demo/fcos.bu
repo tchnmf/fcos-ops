@@ -48,7 +48,7 @@ storage:
       mode: 0644
       contents:
         inline: |
-          node1.demo
+          node2.demo
 
     # Set motd
     - path: /etc/motd
