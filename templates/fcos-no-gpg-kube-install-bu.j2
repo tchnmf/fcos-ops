@@ -44,6 +44,7 @@ storage:
 
     # Set the Hostname
     - path: /etc/hostname
+      overwrite: true
       mode: 0644
       contents:
         inline: |
@@ -76,7 +77,7 @@ storage:
     - path: /usr/local/bin/kube-install
       mode: 0755
       contents:
-        source: https://raw.githubusercontent.com/tchnmf/fcos-ops/main/scripts/kube-install
+        source: https://raw.githubusercontent.com/tchnmf/fcos-ops/feature/scripts/kube-install
 
     # Copy dns-record.sh script
     - path: /usr/local/bin/dns-record

@@ -8,6 +8,12 @@
 # DISK_GB=''
 # STREAM=''
 
+tree manifests/
+echo "Enter manifests/<hostname>/fcos.env path:"
+read fcos_env_file
+source $fcos_env_file
+
+
 sudo -E chcon --verbose --type svirt_home_t ${IGN_CONFIG}
 sudo -E virt-install --connect="qemu:///system" --name="${VM_NAME}" \
     --vcpus="${VCPUS}" --memory="${RAM_MB}" \
