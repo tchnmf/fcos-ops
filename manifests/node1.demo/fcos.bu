@@ -47,7 +47,7 @@ storage:
       mode: 0644
       contents:
         inline: |
-          {{ inventory_hostname }}
+          node1.demo
 
     # Set motd
     - path: /etc/motd

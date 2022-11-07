@@ -1,3 +1,13 @@
+#!/bin/bash
+
+# IGN_CONFIG=''
+# IMAGE=''
+# VM_NAME=''
+# VCPUS=''
+# RAM_MB=''
+# DISK_GB=''
+# STREAM=''
+
 sudo chcon --verbose --type svirt_home_t ${IGN_CONFIG}
 sudo virt-install --connect="qemu:///system" --name="${VM_NAME}" \
     --vcpus="${VCPUS}" --memory="${RAM_MB}" \

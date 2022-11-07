@@ -1,0 +1,35 @@
+# ansible-playbook -i <hostname>, generate-ign.yml
+
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+
+  pre_tasks:
+    - name: create host path in manifests/
+      file:
+        path: "manifests/{{ inventory_hostname }}"
+        state: directory
+
+  tasks:
+    - template:
+        src: fcos-no-gpg-kube-install-bu.j2
+        dest: "manifests/{{ inventory_hostname }}/fcos.bu"
+      # diff: true
+
+    - name: generate ingnition file
+      shell: |
+        podman run --interactive --rm quay.io/coreos/butane:release --pretty --strict < manifests/{{ inventory_hostname }}/fcos.bu > manifests/{{ inventory_hostname }}/fcos.ign
+      changed_when: no
+
+    - name: generate environment file
+      copy:
+        dest: "manifests/{{ inventory_hostname }}/fcos.env"
+        content: |
+          IGN_CONFIG=/opt/fcos-ops/manifests/{{ inventory_hostname }}/fcos.ign
+          IMAGE=/opt/fcos/images/fedora-coreos-36.20221014.3.1-qemu.x86_64.qcow2
+          VM_NAME={{ inventory_hostname }}
+          VCPUS=2
+          RAM_MB=4096
+          DISK_GB=10
+          STREAM=stable
