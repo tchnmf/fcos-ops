@@ -26,10 +26,10 @@
       copy:
         dest: "manifests/{{ inventory_hostname }}/fcos.env"
         content: |
-          IGN_CONFIG=/opt/fcos-ops/manifests/{{ inventory_hostname }}/fcos.ign
-          IMAGE=/opt/fcos/images/fedora-coreos-36.20221014.3.1-qemu.x86_64.qcow2
-          VM_NAME={{ inventory_hostname }}
-          VCPUS=2
-          RAM_MB=4096
-          DISK_GB=10
-          STREAM=stable
+          export IGN_CONFIG=/opt/fcos-ops/manifests/{{ inventory_hostname }}/fcos.ign
+          export IMAGE=/opt/fcos/images/fedora-coreos-36.20221014.3.1-qemu.x86_64.qcow2
+          export VM_NAME={{ inventory_hostname }}
+          export VCPUS=2
+          export RAM_MB=4096
+          export DISK_GB=10
+          export STREAM=stable
