@@ -3,7 +3,7 @@
 # <host_name>.<cluster_name>.<host_dns_domain>
 
 # Requires $DO_TOKEN exported
-source /etc/profile.d
+source /etc/profile.d/do-token.sh
 
 HOST_DEFAULT_INTERFACE="$(awk '$2 == 00000000 { print $1 }' /proc/net/route)"
 HOST_DEFAULT_ADDRESS="$(ip addr show dev "$HOST_DEFAULT_INTERFACE" | awk '$1 == "inet" { sub("/.*", "", $2); print $2 }')"
