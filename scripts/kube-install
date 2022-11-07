@@ -21,7 +21,7 @@ function inform_and_reboot(){
 	for x in 4 3 2 1; do
 		wall "System rebooting in $x"
 		sleep 1;
-		# reboot
+		reboot
 	done
 }
 
