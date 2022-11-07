@@ -68,16 +68,16 @@ storage:
         id: 1000
 
     # Copy DO token shell profile export
-    - path: /usr/local/bin/do-token.sh
+    - path: /etc/profile.d/do-token.sh
       contents:
         source: http://192.168.122.1/private/do-token.sh
       mode: 0755
 
-    # Copy kube-installation script
-    - path: /usr/local/bin/kube-install
-      mode: 0755
-      contents:
-        source: https://raw.githubusercontent.com/tchnmf/fcos-ops/feature/scripts/kube-install
+    # # Copy kube-installation script
+    # - path: /usr/local/bin/kube-install
+    #   mode: 0755
+    #   contents:
+    #     source: https://raw.githubusercontent.com/tchnmf/fcos-ops/feature/scripts/kube-install
 
     # Copy dns-record.sh script
     - path: /usr/local/bin/dns-record
@@ -87,29 +87,31 @@ storage:
 
 systemd:
   units:
-    # Kube installation
-    - name: kube-install.service
-      enabled: true
-      contents: |
-        [Unit]
-        Description=Kube installation unit!
-        [Service]
-        Type=oneshot
-        RemainAfterExit=yes
-        ExecStart=/usr/bin/kube-install
-        [Install]
-        WantedBy=multi-user.target
+    # # Kube installation
+    # - name: kube-install.service
+    #   enabled: true
+    #   contents: |
+    #     [Unit]
+    #     Description=Kube installation unit!
+    #     [Service]
+    #     Type=oneshot
+    #     RemainAfterExit=yes
+    #     ExecStart=/usr/bin/kube-install
+    #     [Install]
+    #     WantedBy=multi-user.target
 
     # DNS record
     - name: dns-record.service
       enabled: true
       contents: |
         [Unit]
+        Wants=network-online.target
+        After=network-online.target
         Description=DNS host record unit!
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/dns-record
+        ExecStart=/usr/local/bin/dns-record
         [Install]
         WantedBy=multi-user.target
 
