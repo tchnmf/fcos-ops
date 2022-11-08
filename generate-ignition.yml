@@ -15,7 +15,7 @@
     - template:
         src: fcos-no-gpg-kube-install-bu.j2
         dest: "manifests/{{ inventory_hostname }}/fcos.bu"
-      # diff: true
+      diff: true
 
     - name: generate ingnition file
       shell: |

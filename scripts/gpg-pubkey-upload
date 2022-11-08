@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+GPG_USER='core@node1.demo.1mlkv.xyz'
+gpg --export --armor core@node1.demo.1mlkv.xyz > node1.demo.1mlkv.xyz.gpg
+
+curl -Ffile=@node1.demo.1mlkv.xyz.gpg 'http://192.168.122.1:25478/upload?token=f9403fc5f537b4ab332d'

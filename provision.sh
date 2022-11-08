@@ -8,10 +8,10 @@
 # DISK_GB=''
 # STREAM=''
 
-tree manifests/
-echo "Enter manifests/<hostname>/fcos.env path:"
-read fcos_env_file
-source $fcos_env_file
+tree -d manifests/
+echo "Enter manifests/<hostname> path:"
+read host_path
+source $host_path/fcos.env
 
 
 sudo -E chcon --verbose --type svirt_home_t ${IGN_CONFIG}
