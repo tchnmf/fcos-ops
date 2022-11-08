@@ -17,6 +17,9 @@ function install_packages(){
 	wall "Packages installed, rebooting..."
 }
 
+function enable_services(){
+	systemctl enable crio kubelet
+}
 function inform_and_reboot(){
 	for x in 4 3 2 1; do
 		wall "System rebooting in $x"
@@ -35,6 +38,7 @@ then
 	chown root:core $log_file
 	import_gpg_keys | tee -a $log_file
 	install_packages | tee -a $log_file
+	enable_services | tee -a $log_file
 	inform_and_reboot | tee -a $log_file
 else
 	import_gpg_keys
