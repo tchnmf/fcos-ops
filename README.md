@@ -19,10 +19,17 @@ $ sudo rpm-ostree install kubelet kubeadm cri-o             # compute
 
 ```
 
+Enable services
+
+```
+sudo systemctl enable --now crio kubelet
+```
 
 Create cluster from `clusterconfig.yml`
 ```
 kubeadm init ––config clusterconfig.yml
+
+sudo kubeadm init --config ./clusterconfig.yml  --ignore-preflight-errors=all
 ```
 
 

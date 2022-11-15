@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 kube_packages=$(rpm -qa|grep kube)
 log_file='/var/log/kube-install.log'
 
@@ -28,21 +27,17 @@ function inform_and_reboot(){
 	done
 }
 
-
-
-
 if test -z "$kube_packages"
 then
 	# echo "\$kube_packages is empty"
 	touch $log_file
 	chown root:core $log_file
-	import_gpg_keys | tee -a $log_file
+	# import_gpg_keys | tee -a $log_file
 	install_packages | tee -a $log_file
-	enable_services | tee -a $log_file
 	inform_and_reboot | tee -a $log_file
 else
-	import_gpg_keys
-#       # echo "\$kube_packages is NOT empty"
+	# import_gpg_keys
+	break
 fi
 
-
+enable_services | tee -a $log_file

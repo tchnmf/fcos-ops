@@ -12,14 +12,15 @@
         state: directory
 
   tasks:
-    - template:
+    - name: template .bu files in manifests/
+      template:
         src: fcos-no-gpg-kube-install-bu.j2
         dest: "manifests/{{ inventory_hostname }}/fcos.bu"
       diff: true
 
-    - name: generate ingnition file
+    - name: butane - generate ingnition file
       shell: |
-        podman run --interactive --rm quay.io/coreos/butane:release --pretty --strict < manifests/{{ inventory_hostname }}/fcos.bu > manifests/{{ inventory_hostname }}/fcos.ign
+        butane --pretty --strict --files-dir /opt/fcos-ops/scripts < manifests/{{ inventory_hostname }}/fcos.bu > manifests/{{ inventory_hostname }}/fcos.ign
       changed_when: no
 
     - name: generate environment file

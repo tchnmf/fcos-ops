@@ -9,9 +9,9 @@
 # STREAM=''
 
 tree -d manifests/
-echo "Enter manifests/<hostname> path:"
+echo "Enter <hostname>:"
 read host_path
-source $host_path/fcos.env
+source manifests/$host_path/fcos.env
 
 
 sudo -E chcon --verbose --type svirt_home_t ${IGN_CONFIG}
@@ -19,4 +19,5 @@ sudo -E virt-install --connect="qemu:///system" --name="${VM_NAME}" \
     --vcpus="${VCPUS}" --memory="${RAM_MB}" \
     --os-variant="fedora-coreos-$STREAM" --import --graphics=none \
     --disk="size=${DISK_GB},backing_store=${IMAGE}" \
-    --qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=${IGN_CONFIG}"
+    --qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=${IGN_CONFIG}" \
+    --autostart
